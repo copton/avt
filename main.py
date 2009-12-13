@@ -3,5 +3,5 @@ from data_model import *
 
 database.setup()
 
-w = Word(contents=u"hallo")
+Word(contents=u"hallo", translation=Translation(contents="walk this way"))
 

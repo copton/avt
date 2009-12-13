@@ -7,7 +7,7 @@ class Word(Entity):
     wrongCnt = Field(Integer, default=0)
 
     sentences = OneToMany('Sentence')
-    translation = OneToMany('Translation')
+    translation = OneToOne('Translation')
 
     def __repr__(self):
         return '<Word %s>' % self.contents
