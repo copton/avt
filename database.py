@@ -19,7 +19,7 @@ def setup():
     db_path = os.path.join(config.data_path, config.db_file)
 
     elixir.metadata.bind = 'sqlite:///' + db_path
-    elixir.metadata.bind.echo = True
+    elixir.metadata.bind.echo = False
     
     elixir.setup_all()
     elixir.create_all()

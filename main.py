@@ -1,7 +1,12 @@
 import database
 from data_model import *
+import ui
 
 database.setup()
 
-Word(contents=u"hallo", translation=Translation(contents="walk this way"))
+my_ui = ui.create()
 
+t = Translation(contents=u"hallo")
+w = Word(contents=u"hello", translation=t)
+
+my_ui.edit(w)

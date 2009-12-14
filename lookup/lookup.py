@@ -21,8 +21,20 @@ def get_search_term():
 
 def search_in_local_database(word):
     words = Word.query.filter(Word.contents.like(u"%%%s" % sys.argv[1])).all()
-    if words:
-        editor.edit(words[0])            
+    if words == []:
+        return False
+
+    sys.stdout.write("is it one of these? (0 means 'no')\n")
+    for i, word in enumerate(words):
+        sys.stdout.write("%d: %s: %s\n" % (i + 1, word.contents, word.translation.contents))
+    number = getch()
+    print "__" + number + "___"
+    if number == '0':
+        print "is 0"
+        return False
+    else:  
+        return True
+         
 
 def search_in_dictionary(word):
     pass
