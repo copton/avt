@@ -1,10 +1,11 @@
 import database
 from data_model import *
 import sys
-import editor
+from ui import Menu, Option, create
+from functools import partial
 
 database.setup()
-
+ui = create()
 
 def workflow():
     word = get_search_term()
@@ -24,19 +25,22 @@ def search_in_local_database(word):
     if words == []:
         return False
 
-    sys.stdout.write("is it one of these? (0 means 'no')\n")
-    for i, word in enumerate(words):
-        sys.stdout.write("%d: %s: %s\n" % (i + 1, word.contents, word.translation.contents))
-    number = getch()
-    print "__" + number + "___"
-    if number == '0':
-        print "is 0"
-        return False
-    else:  
+    choice = [-1]
+
+    def select(index):
+        choice[0] = index 
         return True
-         
+
+    def menu():
+        m = Menu("is it one of these?", delim='\n', footer='\n')
+        for i,w in enumerate(words):
+            m.addOption(Option("%s: %s" % (w.contents, w.translation.contents), str(i), partial(select, i)))
+        return m
+                    
+    ui.play(menu)
+
+    sys.stdout.write("choice = %d\n" % choice[0])
+    return False
 
 def search_in_dictionary(word):
     pass
-
-workflow()

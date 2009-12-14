@@ -15,7 +15,7 @@ def play(menuFactory):
             if option.key in option.text:
                 choices.append(option.text.replace(option.key, "(%s)" % pkey, 1))
             else:
-                choices.append("%s(%s)" % (option.text, pkey))
+                choices.append("(%s) %s" % (pkey, option.text))
         io.output(menu.delim.join(choices) + menu.footer)
         choice = getch()
         if choice == '\r' and menu.default:
