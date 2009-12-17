@@ -1,4 +1,15 @@
-import lookup
-import lookup.lookup
+import guppy
+import os
 
-lookup.lookup.workflow()
+components = guppy.factory.create({
+    "database" : guppy.Component("database.elixir.Elixir"),
+    "database.connection_string" : "sqlite:///%s/.voctrain+/database.sqlite" % os.environ["HOME"],
+    })
+
+database = components["database"]
+
+database.connect()
+
+database.flush()
+
+del database
