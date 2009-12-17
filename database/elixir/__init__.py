@@ -5,7 +5,7 @@ import data_model
 
 class Elixir(database.Database):
     def connect(self):
-        elixir.metadata.bind = self.connection_string
+        elixir.metadata.bind = "sqlite:///" + self.connection_string
         elixir.metadata.bind.echo = False
 
         elixir.setup_all()
