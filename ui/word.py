@@ -1,4 +1,5 @@
-import data_model
+import database
+from guppy import *
 
 def remove_sentence(word, sentence):
     for i, s in enumerate(word.sentences):
@@ -8,6 +9,8 @@ def remove_sentence(word, sentence):
             return
 
 class Word(object):
+    db = RequiredFeature("database", isInstanceOf(database.Database))
+
     def __init__(self, word):
         self.contents = word.contents
         self.translation = word.translation.contents
@@ -18,7 +21,7 @@ class Word(object):
         self.word.contents = unicode(self.contents)
         if self.word.translation.contents != self.translation:
             self.word.translation.delete()
-            self.word.translation = data_model.Translation(contents=self.translation)
+            self.word.translation = self.db.Translation()(contents=self.translation)
 
         current_set = set(s.contents for s in self.word.sentences)
         new_set = set(self.sentences)
@@ -30,4 +33,4 @@ class Word(object):
             remove_sentence(s, self.word)
  
         for s in to_be_added:
-            self.word.sentences.append(data_model.Sentence(contents=s))
+            self.word.sentences.append(self.db.Sentence()(contents=s))

@@ -1,5 +1,4 @@
 from menu import Menu, Option
-from factory import create
 from word import Word as ui_Word
 
 class UI(object):
