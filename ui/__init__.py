@@ -1,11 +1,12 @@
 from menu import Menu, Option
-from word import Word as ui_Word
+import infra
+import database
 
 class UI(object):
-    def play(self, menuFactory):
+    def play(self, menu):
         """render the menu and return the choice.
 
-        menuFactory is a callable object which returns a menu object."""
+        menu is a ui.Menu object."""
         raise NotImplementedError()
 
     def textinput(self, prompt):

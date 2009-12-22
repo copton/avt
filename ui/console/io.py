@@ -1,7 +1,7 @@
 import sys
 
 def input(promp):
-    output(prompt)
+    output(prompt + ": ")
     text = sys.stdin.readline()
     return text
     

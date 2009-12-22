@@ -1,9 +1,8 @@
 from getch import getch
 import io
 
-def play(menuFactory):
+def play(menu):
     while True:
-        menu = menuFactory()
         io.output(menu.header + "\n")
         choices = []
         for option in menu.options:
@@ -19,13 +18,12 @@ def play(menuFactory):
         io.output(menu.delim.join(choices) + menu.footer)
         choice = getch()
         if choice == '\r' and menu.default:
-            action = menu.keys[menu.default].action
+            value = menu.keys[menu.default].value
         else:
             try:
-                action = menu.keys[choice.lower()].action
+                value = menu.keys[choice.lower()].value
             except KeyError:
                 io.output("invalid choice\n")
                 continue
-        quit = action()
-        if quit:
-            break
+
+        return value

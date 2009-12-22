@@ -1,13 +1,17 @@
 class Option(object):
-    __slots__=['text', 'key', 'action']
+    __slots__=['text', 'key', 'value']
 
-    def __init__(self, text, key, action):
+    def __init__(self, text, key, value):
         self.text = text
         assert key.islower() or key.isdigit(), "keys must be lower case or digit"
         self.key = key
-        self.action = action
+        self.value = value
 
 class Menu(object):
+    class Quit(object):
+        pass
+    quit = Quit()
+
     def __init__(self, header, options=(), quit=True, delim=', ', footer=": ", default=None):
         self.header = header 
         self.default = None
@@ -15,8 +19,8 @@ class Menu(object):
         self.footer = footer
         self.options = []
         self.keys = {}
-        for text, key, action in options:
-            self.addOption(Option(text, key, action))
+        for text, key, value in options:
+            self.addOption(Option(text, key, value))
         if quit:
             self.addQuitOption()
         if default:
@@ -24,6 +28,7 @@ class Menu(object):
 
     def setDefault(self, key):
         assert not self.default, "default flag already set for differnt option"
+        assert key in self.keys, "default flag does not exist as key"
         self.default = key
 
     def addOption(self, option):
@@ -32,5 +37,5 @@ class Menu(object):
         self.options.append(option)
 
     def addQuitOption(self):
-        self.addOption(Option("quit", "q", lambda : True))
+        self.addOption(Option("quit", "q", Menu.quit))
 
