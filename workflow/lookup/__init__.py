@@ -5,8 +5,7 @@ import infra
 def select_word(words):
     menu = Menu("select word", quit=True, delimiter="\n", footer="\n")
     for i, word in enumerate(words):
-        entry = word.contents + ": " + word.translation.contents
-        menu.addOption(entry, str(i), i)
+        menu.addOption(Option(str(word), str(i), i))
 
     return menu
 

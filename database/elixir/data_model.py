@@ -10,7 +10,10 @@ class Word(Entity):
     translation = OneToOne('Translation', cascade='all, merge, delete, delete-orphan')
 
     def __repr__(self):
-        return '<Word %s>' % self.contents
+        if self.translation:
+            return "%s: %s" % (self.contents, self.translation.contents)
+        else:
+            return "%s: -" % (self.contents)
 
 class Sentence(Entity):
     contents = Field(Unicode(200))

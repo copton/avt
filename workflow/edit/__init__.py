@@ -21,7 +21,7 @@ class Workflow(workflow.Workflow):
 
         menu = Menu("select word", quit=True, default="q", delim="\n", footer="\n")
         for i, word in enumerate(matches):
-            menu.addOption(Option("%s: %s" % (word.contents, word.translation.contents), str(i), i))
+            menu.addOption(Option(str(word), str(i), i))
         select = self.ui.play(menu)
         if select == Menu.quit:
             return
