@@ -1,6 +1,6 @@
 from menu import Menu, Option
-import infra
 import database
+from word import Word as ui_Word
 
 class UI(object):
     def play(self, menu):
@@ -15,6 +15,10 @@ class UI(object):
 
     def textoutput(self, text):
         """output text"""
+        raise NotImplementedError()
+
+    def erroroutput(self, text):
+        """output error text and wait for confirmation"""
         raise NotImplementedError()
 
     def edit(self, db_word):

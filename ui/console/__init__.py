@@ -13,5 +13,8 @@ class UI(Base):
     def textoutput(self, text):
         return io.output(text)
 
+    def erroroutput(self, text):
+        return io.error(text)
+
     def _edit(self, word):
         return editor.edit(word)

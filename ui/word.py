@@ -13,15 +13,20 @@ class Word(object):
 
     def __init__(self, word):
         self.contents = word.contents
-        self.translation = word.translation.contents
+        if word.translation:
+            self.translation = word.translation.contents
+        else:
+            self.translation = ""
         self.sentences = [s.contents for s in word.sentences]
         self.word = word
 
     def update(self):
         self.word.contents = unicode(self.contents)
-        if self.word.translation.contents != self.translation:
+        if self.word.translation == None:
+            self.word.translation = self.db.Translation()(contents=unicode(self.translation))
+        elif self.word.translation.contents != self.translation:
             self.word.translation.delete()
-            self.word.translation = self.db.Translation()(contents=self.translation)
+            self.word.translation = self.db.Translation()(contents=unicode(self.translation))
 
         current_set = set(s.contents for s in self.word.sentences)
         new_set = set(self.sentences)
@@ -33,4 +38,4 @@ class Word(object):
             remove_sentence(s, self.word)
  
         for s in to_be_added:
-            self.word.sentences.append(self.db.Sentence()(contents=s))
+            self.word.sentences.append(self.db.Sentence()(contents=unicode(s)))
