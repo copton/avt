@@ -14,7 +14,7 @@ class Workflow(workflow.Workflow):
     def _search(self):
         pattern = self.ui.textinput("enter pattern")
         Word = self.db.Word()
-        matches = Word.query.filter(Word.contents.like(ur"%" + pattern)).all()
+        matches = Word.query.filter(Word.contents.like(ur"%" + pattern + "%")).all()
         if matches == []:
             self.ui.textoutput("no matches found")
             return

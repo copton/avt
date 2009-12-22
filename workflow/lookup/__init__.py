@@ -16,7 +16,7 @@ class Workflow(workflow.Workflow):
 
         while True:
             pattern = self.ui.textinput("please enter word")
-            local_matches = Word.query.filter(Word.contents.like(ur"%" + pattern)).all()
+            local_matches = Word.query.filter(Word.contents.like(ur"%" + pattern + ur"%")).all()
 
             select = self.ui.play(select_word(local_matches))
             if select != Menu.quit:
