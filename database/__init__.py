@@ -17,12 +17,3 @@ class Database(object):
 
     def Sentence(self):
        raise NotImplementedError()
-
-    def deleteWord(self, word):
-       raise NotImplementedError()
-
-    def deleteTranslation(self, translation):
-       raise NotImplementedError()
-
-    def deleteSentence(self, sentence):
-       raise NotImplementedError()

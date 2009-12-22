@@ -6,8 +6,8 @@ class Word(Entity):
     rightCnt = Field(Integer, default=0)
     wrongCnt = Field(Integer, default=0)
 
-    sentences = OneToMany('Sentence')
-    translation = OneToOne('Translation')
+    sentences = OneToMany('Sentence', cascade='all, merge, delete, delete-orphan')
+    translation = OneToOne('Translation', cascade='all, merge, delete, delete-orphan')
 
     def __repr__(self):
         return '<Word %s>' % self.contents

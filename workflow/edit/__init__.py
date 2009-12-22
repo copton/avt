@@ -1,6 +1,10 @@
 import workflow
 from ui import Menu, Option
 
+def delete(word):
+    word.delete()
+    del word
+
 class Workflow(workflow.Workflow):
     def _enter(self):
         contents = self.ui.textinput("enter new word")
@@ -25,7 +29,7 @@ class Workflow(workflow.Workflow):
         word = matches[select]
         menu = Menu("what do you want to do?", [
                     ("edit", "e", self.ui.edit),
-                    ("delete", "d", self.db.deleteWord)
+                    ("delete", "d", delete)
                 ], quit=True, default="e")
         select = self.ui.play(menu)
         if select == Menu.quit:

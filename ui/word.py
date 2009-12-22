@@ -1,10 +1,9 @@
 import database
 from guppy import *
 
-def remove_sentence(word, sentence):
+def remove_sentence(sentence, word):
     for i, s in enumerate(word.sentences):
         if sentence == s.contents:
-            s.delete()
             del word.sentences[i]
             return
 
