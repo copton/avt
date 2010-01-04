@@ -16,9 +16,22 @@ def play(menu):
             else:
                 choices.append("(%s) %s" % (pkey, option.text))
         io.output(menu.delim.join(choices) + menu.footer)
-        choice = getch()
-        if choice == '\r' and menu.default:
-            value = menu.keys[menu.default].value
+
+        default = False
+        if menu.confirm:
+            choice = io.input(None)
+            if choice == "":
+                default = True
+        else:
+            choice = getch()
+            if choice == '\r':
+                default = True
+
+        if default:
+            if menu.default:
+                value = menu.keys[menu.default].value
+            else:
+                io.output("invalid choice\n")
         else:
             try:
                 value = menu.keys[choice.lower()].value
