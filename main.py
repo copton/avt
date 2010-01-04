@@ -9,6 +9,7 @@ workflow = os.path.basename(sys.argv[0])
 component_selection = {
     "database" : guppy.Component("database.elixir.Elixir"),
     "ui" : guppy.Component("ui.console.UI"),
+    "dictionary" : guppy.Component("dictionary.trans_de_en.Dictionary"),
     "workflow" : guppy.Component("workflow.%s.Workflow" % workflow),
 }
 

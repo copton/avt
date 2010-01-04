@@ -10,8 +10,8 @@ class UI(Base):
     def textinput(self, prompt):
         return io.input(prompt)
 
-    def textoutput(self, text):
-        return io.output(text)
+    def textoutput(self, text, newline=True):
+        return io.output(text, newline)
 
     def erroroutput(self, text):
         return io.error(text)

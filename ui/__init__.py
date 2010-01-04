@@ -13,7 +13,7 @@ class UI(object):
         """output the prompt and read and return input from the user"""
         raise NotImplementedError()
 
-    def textoutput(self, text):
+    def textoutput(self, text, newline=True):
         """output text"""
         raise NotImplementedError()
 

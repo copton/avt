@@ -3,7 +3,7 @@ import io
 
 def play(menu):
     while True:
-        io.output(menu.header + "\n")
+        io.output(menu.header)
         choices = []
         for option in menu.options:
             if option.key == menu.default:
@@ -15,7 +15,7 @@ def play(menu):
                 choices.append(option.text.replace(option.key, "(%s)" % pkey, 1))
             else:
                 choices.append("(%s) %s" % (pkey, option.text))
-        io.output(menu.delim.join(choices) + menu.footer)
+        io.output(menu.delim.join(choices) + menu.footer, newline=False)
         choice = getch()
         if choice == '\r' and menu.default:
             value = menu.keys[menu.default].value
