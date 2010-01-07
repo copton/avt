@@ -12,11 +12,12 @@ class Menu(object):
         pass
     quit = Quit()
 
-    def __init__(self, header, options=(), quit=True, delim=', ', footer=": ", default=None):
+    def __init__(self, header, options=(), quit=True, delim=', ', footer=": ", default=None, confirm=False):
         self.header = header 
         self.default = None
         self.delim = delim
         self.footer = footer
+        self.confirm = confirm
         self.options = []
         self.keys = {}
         for text, key, value in options:

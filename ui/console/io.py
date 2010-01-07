@@ -1,7 +1,8 @@
 import sys
 
 def input(prompt):
-    output(prompt + ": ", newline=False)
+    if prompt:
+        output(prompt + ": ", newline=False)
     text = sys.stdin.readline().strip()
     return text
     
