@@ -8,12 +8,12 @@ class Database(object):
 
     def flush(self):
         raise NotImplementedError()
-    
-    def Word(self):
+
+    def createWord(self, contents, translation="", sentences=[], lookupCnt=1, rightCnt=0, wrongCnt=0):
         raise NotImplementedError()
 
-    def Translation(self):
+    def updateWord(self, word, attr):
         raise NotImplementedError()
 
-    def Sentence(self):
-       raise NotImplementedError()
+    def query_by_contents(self, contents):
+        raise NotImplementedError()

@@ -11,8 +11,6 @@ class Dictionary(dictionary.Dictionary):
 
     def search(self, pattern):
         regex = re.compile(pattern)
-        Word = self.db.Word()
-        Translation = self.db.Translation()
 
         f = open(self.path, "r")
         res = []
@@ -29,8 +27,7 @@ class Dictionary(dictionary.Dictionary):
                 en_parts = map(str.strip, en.split('|'))
                 assert len(de_parts) == len(en_parts)
                 for i in range(len(de_parts)):
-                    trans = Translation(contents = de_parts[i])
-                    word = Word(contents = en_parts[i], translation = trans)
+                    word = self.db.createWord(contents = en_parts[i], translation = de_parts[i])
                     res.append(word)
 
         return res

@@ -14,11 +14,15 @@ class Elixir(database.Database):
     def flush(self):
         elixir.session.commit()
 
-    def Word(self):
-        return data_model.Word
+    def createWord(self, contents, translation="", sentences=[], lookupCnt=1, rightCnt=0, wrongCnt=0):
+        return data_model.Word(
+            contents=contents,
+            translation=data_model.Translation(contents=translation),
+            sentences = [data_model.Sentence(contents=sentences[s]) for s in sentences],
+            lookupCnt=lookupCnt,
+            rightCnt=rightCnt,
+            wrontCnt=wrongCnt,
+        )
 
-    def Sentence(self):
-        return data_model.Sentence
-    
-    def Translation(self):
-        return data_model.Translation
+    def query_by_contents(self, pattern):
+        return data_model.Word.query.filter(data_model.Word.contents.like(pattern)).all()

@@ -4,7 +4,7 @@ import dictionary
 from guppy import *
 
 def select_word(words):
-    menu = Menu("select word", quit=True, delim="\n", footer="\n")
+    menu = Menu("select word", quit=True, delim="\n", footer="\n", confirm=True)
     for i, word in enumerate(words):
         menu.addOption(Option(str(word), str(i), i))
 
@@ -19,7 +19,7 @@ class Workflow(workflow.Workflow):
             return None
 
         if len(matches) == 1:
-            self.ui.textoutput("found " + str(word))
+            self.ui.textoutput("found " + str(matches[0]))
             select = 0
         else:
             select = self.ui.play(select_word(matches))
@@ -37,13 +37,11 @@ class Workflow(workflow.Workflow):
         return select
 
     def db_lookup(self, pattern):
-        Word = self.db.Word()
-        matches = Word.query.filter(Word.contents.like(unicode(pattern))).all()
+        matches = self.db.query_by_contents(unicode(pattern))
         return self._process_matches(matches) != None
 
     def dict_lookup(self, pattern):
         matches = self.dictionary.search(pattern)
-        print "###", matches
         select = self._process_matches(matches)
         if select != None:
             matches.pop(select)

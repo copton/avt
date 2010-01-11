@@ -8,13 +8,12 @@ def delete(word):
 class Workflow(workflow.Workflow):
     def _enter(self):
         contents = self.ui.textinput("enter new word")
-        word = self.db.Word()(contents=contents) 
+        word = self.db.createWord(contents=contents) 
         self.ui.edit(word)
 
     def _search(self):
         pattern = self.ui.textinput("enter pattern")
-        Word = self.db.Word()
-        matches = Word.query.filter(Word.contents.like(ur"%" + pattern + "%")).all()
+        matches = self.db.query_by_contents(ur"%" + pattern + "%")
         if matches == []:
             self.ui.textoutput("no matches found")
             return
