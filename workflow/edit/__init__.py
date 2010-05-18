@@ -16,7 +16,7 @@ class Workflow(workflow.Workflow):
         Word = self.db.Word()
         matches = Word.query.filter(Word.contents.like(ur"%" + pattern + "%")).all()
         if matches == []:
-            self.ui.textoutput("no matches found")
+            self.ui.textoutput("no matches found.")
             return
 
         menu = Menu("select word", quit=True, default="q", delim="\n", footer="\n")

@@ -3,7 +3,7 @@ import io
 
 def play(menu):
     while True:
-        io.output(menu.header + "\n")
+        io.output("\n" + menu.header + "\n")
         choices = []
         for option in menu.options:
             if option.key == menu.default:
