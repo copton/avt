@@ -13,3 +13,8 @@ def output(text):
 def error(text):
     output(text)
     sys.stdin.readline()
+
+def show(word):
+    output(str(word) + "\n")
+    for sentence in word.sentences:
+        output(str(sentence) + "\n")

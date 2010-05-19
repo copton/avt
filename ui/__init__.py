@@ -21,6 +21,10 @@ class UI(object):
         """output error text and wait for confirmation"""
         raise NotImplementedError()
 
+    def show(self, word):
+        """output word"""
+        raise NotImplementedError()
+
     def edit(self, db_word):
         """let the user edit the given word, which is a ui.Word object"""
         ui_word = ui_Word(db_word)

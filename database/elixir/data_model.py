@@ -18,6 +18,9 @@ class Word(Entity):
 class Sentence(Entity):
     contents = Field(Unicode(200))
     word = ManyToOne('Word')
+    
+    def __repr__(self):
+        return self.contents
 
 class Translation(Entity):
     contents = Field(Unicode(200))

@@ -16,5 +16,8 @@ class UI(Base):
     def erroroutput(self, text):
         return io.error(text)
 
+    def show(self, word):
+        return io.show(word)
+
     def _edit(self, word):
         return editor.edit(word)
