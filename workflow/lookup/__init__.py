@@ -1,4 +1,7 @@
+import database
+import dictionary
 import workflow
+from guppy import *
 from ui import Menu, Option
 
 def select_word(words):
@@ -9,6 +12,7 @@ def select_word(words):
     return menu
 
 class Workflow(workflow.Workflow):
+    dictionary = RequiredFeature("dictionary", isInstanceOf(dictionary.Dictionary)) 
     def _local_lookup(self, pattern):
         Word = self.db.Word()
 
@@ -36,7 +40,11 @@ class Workflow(workflow.Workflow):
             
         return False
 
+    def _dictionary_lookup(self, pattern):
+        matches = self.dictionary.search(pattern):
+          
+
     def _run(self):
         while True:
             pattern = self.ui.textinput("please enter word")
-            self._local_lookup(pattern)
+            self._local_lookup(pattern) && self._dictionary_lookup(pattern)
