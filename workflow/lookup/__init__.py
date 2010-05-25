@@ -14,9 +14,8 @@ def select_word(words):
 class Workflow(workflow.Workflow):
     dictionary = RequiredFeature("dictionary", isInstanceOf(dictionary.Dictionary)) 
     def _local_lookup(self, pattern):
-        Word = self.db.Word()
 
-        local_matches = Word.query.filter(Word.contents.like(ur"%" + pattern + ur"%")).all()
+        local_matches = self.db.search(pattern)
 
         if len(local_matches) == 0:
             self.ui.textoutput("no matches found in local database")

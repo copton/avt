@@ -19,5 +19,5 @@ class UI(Base):
     def show(self, word):
         return io.show(word)
 
-    def _edit(self, word):
+    def edit(self, word):
         return editor.edit(word)

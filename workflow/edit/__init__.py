@@ -1,5 +1,6 @@
 import workflow
 from ui import Menu, Option
+import database
 
 def delete(word):
     word.delete()
@@ -8,13 +9,11 @@ def delete(word):
 class Workflow(workflow.Workflow):
     def _enter(self):
         contents = self.ui.textinput("enter new word")
-        word = self.db.Word()(contents=contents) 
-        self.ui.edit(word)
+        self.ui.edit(database.Word(contents, ""))
 
     def _search(self):
         pattern = self.ui.textinput("enter pattern")
-        Word = self.db.Word()
-        matches = Word.query.filter(Word.contents.like(ur"%" + pattern + "%")).all()
+        matches = self.db.search(pattern)
         if matches == []:
             self.ui.textoutput("no matches found.")
             return

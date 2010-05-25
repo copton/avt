@@ -7,7 +7,7 @@ from config import config
 workflow = os.path.basename(sys.argv[0])
 
 component_selection = {
-    "database" : guppy.Component("database.elixir.Elixir"),
+    "database" : guppy.Component("database.ram.RAM"),
     "ui" : guppy.Component("ui.console.UI"),
     "workflow" : guppy.Component("workflow.%s.Workflow" % workflow),
     "dictionary" : guppy.Component("dictionary/trans_de_en"),

@@ -1,6 +1,5 @@
 from menu import Menu, Option
 import database
-from word import Word as ui_Word
 
 class UI(object):
     def play(self, menu):
@@ -25,12 +24,5 @@ class UI(object):
         """output word"""
         raise NotImplementedError()
 
-    def edit(self, db_word):
-        """let the user edit the given word, which is a ui.Word object"""
-        ui_word = ui_Word(db_word)
-        self._edit(ui_word)
-        ui_word.update()
-        return ui_word.word
-
-    def _edit(self, ui_word):
-        raise NotImplementedError()
+    def edit(self, word):
+        """let the user edit the given word"""
