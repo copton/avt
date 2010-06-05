@@ -4,14 +4,15 @@ import os
 import os.path
 import re
 
-def RAM(database.Database):
+class RAM(database.Database):
     def connect(self):
         conf_path = os.path.split(self.connection_string)[0]
         if not os.path.isdir(conf_path):
             os.mkdir(conf_path)
-            self.wrods = []
+            self.words = []
         else:
             if os.path.isfile(self.connection_string):
+                f = open(self.connection_string, "r")
                 self.words = pickle.load(f)
             else:
                 self.words = []
@@ -22,10 +23,7 @@ def RAM(database.Database):
         f.close()
 
     def add(self, word):
-        for i in range(len(self.words)):
-            if self.words[i] > word:
-                self.words.insert(i, word)
-                return
+        self.words.append(word)
 
     def remove(self, word):
         for i in range(len(self.words)):

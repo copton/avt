@@ -10,7 +10,7 @@ component_selection = {
     "database" : guppy.Component("database.ram.RAM"),
     "ui" : guppy.Component("ui.console.UI"),
     "workflow" : guppy.Component("workflow.%s.Workflow" % workflow),
-    "dictionary" : guppy.Component("dictionary/trans_de_en"),
+    "dictionary" : guppy.Component("dictionary.trans_de_en.Dictionary"),
 }
 
 config.update(component_selection)

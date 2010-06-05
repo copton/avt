@@ -15,7 +15,7 @@ def play(menu):
                 choices.append(option.text.replace(option.key, "(%s)" % pkey, 1))
             else:
                 choices.append("(%s) %s" % (pkey, option.text))
-        io.output(menu.delim.join(choices) + menu.footer)
+        io.output(menu.delimiter.join(choices) + menu.footer)
 
         default = False
         if menu.confirm:

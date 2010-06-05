@@ -12,10 +12,10 @@ class Menu(object):
         pass
     quit = Quit()
 
-    def __init__(self, header, options=(), quit=True, delim=', ', footer=": ", default=None, confirm=False):
+    def __init__(self, header, options=(), quit=True, delimiter=', ', footer=": ", default=None, confirm=False):
         self.header = header 
         self.default = None
-        self.delim = delim
+        self.delimiter= delimiter
         self.footer = footer
         self.confirm = confirm
         self.options = []

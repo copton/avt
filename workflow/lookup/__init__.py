@@ -5,7 +5,7 @@ from guppy import *
 from ui import Menu, Option
 
 def select_word(words):
-    menu = Menu("select word", quit=True, delim="\n", footer="\n")
+    menu = Menu("select word", quit=True, delimiter="\n", footer="\n")
     for i, word in enumerate(words):
         menu.addOption(Option(str(word), str(i), i))
 
