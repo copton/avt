@@ -32,7 +32,7 @@ class Workflow(workflow.Workflow):
             words += self.dictionary.search(pattern)
 
             if words == []:
-                self.ui.textoutput("no matches found")
+                self.ui.textoutput("no matches found\n")
                 continue
                  
             words = self.remove_duplicates(words)

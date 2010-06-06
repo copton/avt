@@ -15,7 +15,7 @@ class Workflow(object):
         raise NotImplementedError()
 
     def _selectWord(self, words, prompt="select word"):
-        menu = ui.Menu(prompt, quit=True, default="q", delimiter="\n", footer="\n")
+        menu = ui.Menu(prompt, quit=True, default="q", delimiter="\n", footer="\n", confirm=True)
         for i, word in enumerate(words):
             menu.addOption(ui.Option(word.contents + ": " + word.translation, str(i), i))
         select = self.ui.play(menu)
