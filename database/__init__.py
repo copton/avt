@@ -9,6 +9,9 @@ class Word(object):
         self.rightCnt = 0
         self.wrongCnt = 0
 
+#    def __repr__(self):
+#        return "%s: %s (%d, %d, %d)" % (self.contents, self.translation, self.lookupCnt, self.rightCnt, self.wrongCnt)
+
 class Database(object):
     connection_string = RequiredFeature("database.connection_string", isInstanceOf(str))
 

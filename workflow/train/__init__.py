@@ -15,6 +15,7 @@ class Workflow(workflow.Workflow):
         self.ui.textoutput("starting training\n")
         words = self.db.sort(compare)
         for word in words:
+            self.ui.textoutput("score: %d\n" % score(word))
             self.ui.textoutput("\n".join([word.contents] + word.sentences + [""]))
             self.ui.textinput("press any key to see the translation") 
             self.ui.textoutput(word.translation + "\n")

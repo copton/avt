@@ -37,5 +37,5 @@ class RAM(database.Database):
 
     def sort(self, compare):
         res = [w for w in self.words]
-        res.sort(compare)
+        res.sort(compare, reverse=True)
         return res
