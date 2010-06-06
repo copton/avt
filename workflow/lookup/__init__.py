@@ -4,46 +4,47 @@ import workflow
 from guppy import *
 from ui import Menu, Option
 
-def select_word(words):
-    menu = Menu("select word", quit=True, delimiter="\n", footer="\n")
-    for i, word in enumerate(words):
-        menu.addOption(Option(str(word), str(i), i))
-
-    return menu
-
 class Workflow(workflow.Workflow):
     dictionary = RequiredFeature("dictionary", isInstanceOf(dictionary.Dictionary)) 
-    def _local_lookup(self, pattern):
 
-        local_matches = self.db.search(pattern)
+    def remove_duplicates(self, words):
+        result = []
+        def exists(word):
+            for r in result:
+                if word.contents == r.contents  \
+                  and word.translation == r.translation:
+                    return True
+            return False
 
-        if len(local_matches) == 0:
-            self.ui.textoutput("no matches found in local database")
-            return True
-
-        if len(local_matches) == 1:
-            select = 0
-        else:
-            select = self.ui.play(select_word(local_matches))
-            if select == Menu.quit:
-                return True
-
-        word = local_matches[select]
-        word.lookupCnt += 1
-        self.ui.show(word)
-
-        if self.ui.play(Menu("do you want to edit this word?", 
-                        [("yes", "y", True), ("no", "n", False)], 
-                        default="n",quit=False)) == True:
-            self.ui.edit(word)
-            
-        return False
-
-    def _dictionary_lookup(self, pattern):
-        matches = self.dictionary.search(pattern):
-          
-
+        for word in words:
+            if not exists(word):
+                result.append(word)
+        return result
+                
     def _run(self):
         while True:
-            pattern = self.ui.textinput("please enter word")
-            self._local_lookup(pattern) && self._dictionary_lookup(pattern)
+            pattern = self.ui.textinput("please enter word (leave blank to quit)")
+            if pattern == "":
+                break
+
+            words = self.db.search(pattern)
+            db_idx = len(words)
+            words += self.dictionary.search(pattern)
+
+            if words == []:
+                self.ui.textoutput("no matches found")
+                continue
+                 
+            words = self.remove_duplicates(words)
+            idx, word = self._selectWord(words)
+            if word == None:
+                continue
+
+            if idx < db_idx:
+                word.lookupCnt += 1
+                self.ui.textoutput("increased lookup count for word '%s'\n" % word.contents)
+                continue
+        
+            self.ui.edit(word)
+            self.db.add(word)
+            self.ui.textoutput("added word '%s' to database\n" % word.contents)

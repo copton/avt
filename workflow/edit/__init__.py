@@ -9,45 +9,14 @@ class Workflow(workflow.Workflow):
 
     dictionary = RequiredFeature("dictionary", isInstanceOf(dictionary.Dictionary))
 
-    def selectWord(self, words, prompt="select word"):
-        menu = Menu(prompt, quit=True, default="q", delimiter="\n", footer="\n")
-        for i, word in enumerate(words):
-            menu.addOption(Option(word.contents + ": " + word.translation, str(i), i))
-        select = self.ui.play(menu)
-        if select == Menu.quit:
-            return None
-            
-        return words[select]
-
     def _run(self):
         def add():
-            def manually():
-                contents = self.ui.textinput("enter new word (leave blank to quit)")
-                if contents == "":
-                    return
-                word = database.Word(contents, "")
-                self.ui.edit(word)
-                self.db.add(word)
-
-            def search():
-                pattern = self.ui.textinput("enter the search pattern")
-                words = self.dictionary.search(pattern)  
-                if words == []:
-                    self.ui.textoutput("no matches found.")
-                    return
-                word = self.selectWord(words)
-                if word == None:
-                    return
-
-                self.ui.edit(word)
-                self.db.add(word)
-
-            select=self.ui.play(Menu("what do you want to do?", [
-                        ("add manually", "m", manually),
-                        ("search in dictionary", "s", search)
-                    ], quit=True, default="s"))
-            if select != Menu.quit:
-                select()
+            contents = self.ui.textinput("enter new word (leave blank to quit)")
+            if contents == "":
+                return
+            word = database.Word(contents, "")
+            self.ui.edit(word)
+            self.db.add(word)
 
         def edit():
             pattern = self.ui.textinput("which word do you want to edit?")
@@ -56,7 +25,7 @@ class Workflow(workflow.Workflow):
                 self.ui.textoutput("no matches found.")
                 return
 
-            word = self.selectWord(matches)
+            idx, word = self._selectWord(matches)
             if word == None:
                 return
                 

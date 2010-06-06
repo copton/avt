@@ -15,7 +15,6 @@ def parse(file, word):
     state = 0
     for line in file.readlines():
         line = line.strip()
-        print line, state
         if line.startswith("#"):
             continue
         if line == "":

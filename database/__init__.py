@@ -5,7 +5,7 @@ class Word(object):
         self.contents = contents
         self.translation = translation
         self.sentences = []
-        self.lookupCnt = 0
+        self.lookupCnt = 1
         self.rightCnt = 0
         self.wrongCnt = 0
 
