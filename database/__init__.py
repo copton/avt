@@ -32,3 +32,6 @@ class Database(object):
         """returns a list of words that match the given regular expression"""
         raise NotImplementedError()
         
+    def sort(self, compare):
+        """return the list of all words, sorted in descending order according to the compare function"""
+        raise NotImplementedError()

@@ -1,13 +1,9 @@
 import workflow
 from ui import Menu, Option
 import database
-from guppy import *
-import dictionary
 
 class Workflow(workflow.Workflow):
     """edit local database"""
-
-    dictionary = RequiredFeature("dictionary", isInstanceOf(dictionary.Dictionary))
 
     def _run(self):
         def add():
