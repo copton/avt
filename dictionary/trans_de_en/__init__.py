@@ -5,7 +5,11 @@ from threading import Thread
 from guppy import *
 
 class Dictionary(dictionary.Dictionary):
+
     def __init__(self):
+        startupNotification(self.startup)
+
+    def startup(self):
         self.source = Source()
 
     def search(self, pattern):
@@ -15,7 +19,7 @@ class Dictionary(dictionary.Dictionary):
         res = []
         for entry in entries:
             for word in entry.en:
-                mo = re.search(word)
+                mo = rep.search(word)
                 if mo:
                     res.append(Word(word, "|".join(entry.de)))
         return res
@@ -25,7 +29,6 @@ class Entry(object):
     def __init__(self, de, en):
         self.de = de
         self.en = en
-
 
 class Source(Thread):
     dict_file = RequiredFeature("dictionary.dict_file", isInstanceOf(str))
