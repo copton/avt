@@ -1,8 +1,10 @@
 #! /usr/bin/python
-import guppy
-import sys
 import os.path
 from config import config
+import sys
+
+sys.path.append("/home/alex/scm/guppy")
+import guppy
 
 workflow = os.path.basename(sys.argv[0])
 
