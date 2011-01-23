@@ -33,7 +33,7 @@ class RAM(database.Database):
 
     def search(self, pattern):
         rep = re.compile(pattern)
-        return [word for word in self.words if rep.match(word.contents)]
+        return [word for word in self.words if rep.search(word.contents)]
 
     def sort(self, compare):
         res = [w for w in self.words]
